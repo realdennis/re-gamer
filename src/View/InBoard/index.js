@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
+import LoadButton from '../../Components/LoadButton';
+import API from '../../Lib/API';
 const ArticleList = styled.ul`
   list-style: none;
   text-align: left;
@@ -8,7 +10,7 @@ const ArticleList = styled.ul`
   li {
     &:hover {
       opacity: 0.8;
-      background-color: rgb(240, 240, 240);
+      background-color: rgb(20, 20, 120);
     }
     cursor: pointer;
     user-select: none;
@@ -29,24 +31,8 @@ const ArticleList = styled.ul`
     }
   }
 `;
-const LoadButton = styled.button`
-  outline: none;
-  background: none;
-  border-color: pink;
-  border-width: 2px;
-  padding: 10px;
-  &:active {
-    border-style: solid;
-    background-color: gray;
-  }
-`;
-const API = 'https://api.gamer.com.tw/mobile_app/forum/v1/B.php';
-const fetchAPI = async (bsn, page) => {
-  const target = `${API}?bsn=${bsn}&page=${page}`;
-  let res = await fetch(target);
-  let json = await res.json();
-  return json;
-};
+const URL = 'https://api.gamer.com.tw/mobile_app/forum/v1/B.php';
+
 class InBoard extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +45,7 @@ class InBoard extends Component {
   }
   async APIFire() {
     try {
-      let json = await fetchAPI(this.bsn, this.state.page);
+      let json = await API(URL, { bsn: this.bsn, page: this.state.page });
       this.setState(prev => ({
         result: [...prev.result, ...json.list],
         page: (prev.page += 1)
@@ -85,8 +71,6 @@ class InBoard extends Component {
                   name: article.title
                 }}
               >
-                {/* 
-                <img src={article.thumbnail} alt="" />*/}
                 <p>{article.title}</p>
               </Link>
             </li>

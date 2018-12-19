@@ -9,6 +9,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 400,
     height: 600,
+    frame: false,
     webPreferences: { webSecurity: false }
   });
 

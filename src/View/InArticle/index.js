@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
+import LoadButton from '../../Components/LoadButton';
+import API from '../../Lib/API';
 const CardList = styled.ul`
   list-style: none;
   text-align: left;
@@ -8,7 +10,6 @@ const CardList = styled.ul`
   li {
     &:hover {
       opacity: 0.8;
-      background-color: rgb(240, 240, 240);
     }
     cursor: pointer;
     user-select: none;
@@ -28,26 +29,7 @@ const CardList = styled.ul`
     }
   }
 `;
-const LoadButton = styled.button`
-  outline: none;
-  background: none;
-  border-color: pink;
-  border-width: 2px;
-  padding: 10px;
-  &:active {
-    border-style: solid;
-    background-color: gray;
-  }
-`;
-const API = 'https://api.gamer.com.tw/mobile_app/forum/v3/C.php';
-const fetchAPI = async (bsn, snA, index) => {
-  const target = `${API}?bsn=${bsn}&snA=${snA}&index=${index}`;
-  console.log(target);
-  let res = await fetch(target);
-  let json = await res.json();
-  //console.log(json);
-  return json;
-};
+const URL = 'https://api.gamer.com.tw/mobile_app/forum/v3/C.php';
 class InBoard extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +44,11 @@ class InBoard extends Component {
   }
   async APIFire() {
     try {
-      let json = await fetchAPI(this.bsn, this.snA, this.state.index);
+      let json = await API(URL, {
+        bsn: this.bsn,
+        snA: this.snA,
+        index: this.state.index
+      });
       this.setState(prev => ({
         result: [...prev.result, ...json.list],
         index: (prev.index += 20)
@@ -80,11 +66,16 @@ class InBoard extends Component {
       <div>
         <h1>{this.name}</h1>
         <CardList>
-          {this.state.result.map((card,k) => (
+          {this.state.result.map((card, k) => (
             <li key={k}>
               <div>
-                <p>{card.author} ({card.nickname})</p>
-                <p id="content" dangerouslySetInnerHTML={{__html:card.content_html}} />
+                <p>
+                  {card.author} ({card.nickname})
+                </p>
+                <p
+                  id="content"
+                  dangerouslySetInnerHTML={{ __html: card.content_html }}
+                />
               </div>
             </li>
           ))}

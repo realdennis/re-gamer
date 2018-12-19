@@ -13,15 +13,17 @@ const GamerApp = styled.div`
   flex-direction: column;
 `;
 const Main = styled.main`
-  height: inherit;
   overflow: auto;
+  height:100%;
   & > * {
-    height: inherit;
+    height:100%;
   }
+  background-color: rgb(0, 0, 0);
+  color: silver;
 `;
 const Footer = styled.footer`
   height: 40px;
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(40, 40, 40);
   ul {
     display: flex;
     justify-content: space-around;
@@ -48,7 +50,7 @@ class App extends Component {
             <Route path="/search" component={Search} />
             <Route path="/recent" component={About} />
             <Route path="/board/:bsn" component={InBoard} />
-            <Route path="/article/:bsn/:snA" component={InArticle}></Route>
+            <Route path="/article/:bsn/:snA" component={InArticle} />
           </Main>
           <Footer>
             <ul>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
+import LoadButton from '../../Components/LoadButton';
+import API from '../../Lib/API';
 const BoardList = styled.ul`
   list-style: none;
   text-align: left;
@@ -8,7 +10,7 @@ const BoardList = styled.ul`
   li {
     &:hover {
       opacity: 0.8;
-      background-color: rgb(240, 240, 240);
+      background-color: rgb(20, 20, 120);
     }
     cursor: pointer;
     user-select: none;
@@ -30,18 +32,6 @@ const BoardList = styled.ul`
   }
 `;
 
-const LoadButton = styled.button`
-  outline: none;
-  background: none;
-  border-color: pink;
-  border-width: 2px;
-  padding: 10px;
-  &:active {
-    border-style: solid;
-    background-color: gray;
-  }
-`;
-
 class HotBoard extends Component {
   constructor(props) {
     super(props);
@@ -52,15 +42,10 @@ class HotBoard extends Component {
       loading: false
     };
   }
-  async fetchAPI() {
-    const target = `${this.api}?page=${this.state.page}`;
-    let res = await fetch(target);
-    let json = await res.json();
-    return json;
-  }
+
   async APIFire() {
     try {
-      let json = await this.fetchAPI();
+      let json = await API(this.api, { page: this.state.page });
       this.setState(prev => ({
         board: [...prev.board, ...json],
         page: (prev.page += 1)
