@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import CustomList from '../../Components/CustomList';
 import LoadButton from '../../Components/LoadButton';
 import API from '../../Lib/API';
+//import styled from 'styled-components';
+const ArticleList = CustomList;
 
 const URL = 'https://api.gamer.com.tw/mobile_app/forum/v1/B.php';
 
@@ -34,9 +36,9 @@ class InBoard extends Component {
   render() {
     return (
       <div>
-        <CustomList>
+        <ArticleList>
           {this.state.result.map((article, key) => (
-            <li key={key}>
+            <li className="article-title" key={key}>
               <Link
                 to={{
                   pathname: `/article/${this.bsn}/${article.snA}`,
@@ -47,7 +49,7 @@ class InBoard extends Component {
               </Link>
             </li>
           ))}
-        </CustomList>
+        </ArticleList>
         <LoadButton onClick={() => this.APIFire()}>Load More</LoadButton>
       </div>
     );

@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro';
 const CustomList = styled.ul`
+  margin: 0;
   list-style: none;
   text-align: left;
   padding: 0;
@@ -20,6 +21,11 @@ const CustomList = styled.ul`
         object-fit: cover;
         border-radius: 100%;
         margin-right: 10px;
+      }
+      & > p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }

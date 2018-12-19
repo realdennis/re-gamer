@@ -5,11 +5,21 @@ import CustomList from '../../Components/CustomList';
 import styled from 'styled-components';
 const URL = 'https://api.gamer.com.tw/mobile_app/forum/v3/C.php';
 const CardList = styled(CustomList)`
-  li:hover {
-    background-color: rgba(100, 100, 100, 0.3);
+  li {
+    &:hover {
+      background-color: rgba(100, 100, 100, 0.3);
+    }
+    img {
+      max-width: 100%;
+    }
+    p.author,
+    p.time {
+      background-color: navy;
+      margin: 0;
+    }
   }
 `;
-class InBoard extends Component {
+class InArticle extends Component {
   constructor(props) {
     super(props);
     //console.log(this.props);
@@ -42,16 +52,17 @@ class InBoard extends Component {
   }
   render() {
     return (
-      <div>
+      <div className={this.props.className}>
         <CardList>
           {this.state.result.map((card, k) => (
             <li key={k}>
               <div>
-                <p>
+                <p className="author">
                   {card.author} ({card.nickname})
                 </p>
+                <p className="time">{card.date}</p>
                 <p
-                  class="content"
+                  className="content"
                   dangerouslySetInnerHTML={{ __html: card.content_html }}
                 />
               </div>
@@ -63,4 +74,4 @@ class InBoard extends Component {
     );
   }
 }
-export default InBoard;
+export default InArticle;

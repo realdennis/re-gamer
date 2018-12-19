@@ -47,8 +47,7 @@ class Search extends Component {
   }
   render() {
     return (
-      <div id="Search">
-        <h1>搜尋</h1>
+      <div className={this.props.className} id="Search">
         {this.state.isSubmit ? (
           <SearchViewWrapper>
             <h2>Now search... {this.state.keyword}</h2>
@@ -66,4 +65,4 @@ class Search extends Component {
     );
   }
 }
-export default Search;
+export default (Search)

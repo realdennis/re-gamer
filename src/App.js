@@ -7,24 +7,8 @@ import InBoard from './View/InBoard';
 import InArticle from './View/InArticle';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-const Header = styled.header`
-  height: 60px;
-  display: flex;
-  align-items: center;
-  background-color: rgb(30, 30, 30);
-  div.back-button {
-    width: 60px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  h1 {
-    margin: 0;
-    width: 100%;
-  }
-`;
+import Header from './Components/Header';
+
 const Main = styled.main`
   overflow: auto;
   height: 100%;
@@ -43,6 +27,7 @@ const Footer = styled.footer`
     padding: 0;
     height: 100%;
     li {
+      font-size: 1.4em;
       & > a {
         /*For Router Link*/
         height: 100%;
@@ -63,17 +48,12 @@ class App extends Component {
     return (
       <Router>
         <div className={this.props.className}>
-          <Header>
-            <div className="back-button" onClick={() => window.history.back()}>
-              <FontAwesomeIcon icon="chevron-left" />
-            </div>
-            <h1>title</h1>
-          </Header>
+          <Header />
           <Main>
             <Route path="" exact component={HotBoard} />
             <Route path="/about" component={About} />
             <Route path="/search" component={Search} />
-            <Route path="/recent" component={About} />
+            <Route path="/recent" name="最近瀏覽" component={About} />
             <Route path="/board/:bsn" component={InBoard} />
             <Route path="/article/:bsn/:snA" component={InArticle} />
           </Main>
@@ -106,12 +86,11 @@ class App extends Component {
     );
   }
 }
-
 export default styled(App)`
   height: 100%;
   display: flex;
   flex-direction: column;
   background-color: rgb(0, 0, 0) !important;
   color: silver;
-  text-align:center;
+  text-align: center;
 `;
