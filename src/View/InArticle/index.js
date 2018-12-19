@@ -6,8 +6,11 @@ import styled from 'styled-components';
 const URL = 'https://api.gamer.com.tw/mobile_app/forum/v3/C.php';
 const CardList = styled(CustomList)`
   li {
+    border:none;
+    opacity:.8;
     &:hover {
-      background-color: rgba(100, 100, 100, 0.3);
+      background-color:black;
+      opacity:1;
     }
     img {
       max-width: 100%;
@@ -47,6 +50,11 @@ class InArticle extends Component {
       console.log(e);
     }
   }
+  highLight(e) {
+    e.currentTarget
+      .querySelectorAll('*')
+      .forEach(dom => (dom.style.color = 'silver'));
+  }
   componentDidMount() {
     this.APIFire();
   }
@@ -62,6 +70,7 @@ class InArticle extends Component {
                 </p>
                 <p className="time">{card.date}</p>
                 <p
+                  onClick={e => this.highLight(e)}
                   className="content"
                   dangerouslySetInnerHTML={{ __html: card.content_html }}
                 />

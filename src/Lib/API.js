@@ -7,7 +7,7 @@ const getQueryString = p => {
 
 const fetchAPI = async (URL, params) => {
   const target = `${URL}?${getQueryString(params)}`;
-  console.log(target);
+  //console.log(target);
   let res = await fetch(target);
   let json = await res.json();
   //console.log(json);

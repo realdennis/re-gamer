@@ -2,7 +2,6 @@ import styled from 'styled-components/macro';
 const CustomList = styled.ul`
   margin: 0;
   list-style: none;
-  text-align: left;
   padding: 0;
   li {
     &:hover {
@@ -11,11 +10,17 @@ const CustomList = styled.ul`
     }
     cursor: pointer;
     user-select: none;
-    padding: 5px;
+    text-align: left;
     border-bottom: 1px solid gray;
+    p {
+      padding: 5px;
+    }
     & > a {
+      padding:5px;
       display: flex;
+      align-items: center;
       & > img {
+        padding: 0;
         height: 50px;
         width: 50px;
         object-fit: cover;
