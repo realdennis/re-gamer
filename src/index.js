@@ -5,6 +5,12 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import smoothscroll from 'smoothscroll-polyfill';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faHotjar } from '@fortawesome/free-brands-svg-icons';
+import { faFire, faSearch,faClock,faInfoCircle,faChevronLeft} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faHotjar, faFire, faSearch,faClock,faInfoCircle,faChevronLeft);
+
 smoothscroll.polyfill();
 ReactDOM.render(<App />, document.getElementById('root'));
 

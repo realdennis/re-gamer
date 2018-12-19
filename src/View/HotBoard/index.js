@@ -1,36 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components/macro';
 import LoadButton from '../../Components/LoadButton';
 import API from '../../Lib/API';
-const BoardList = styled.ul`
-  list-style: none;
-  text-align: left;
-  padding: 0;
-  li {
-    &:hover {
-      opacity: 0.8;
-      background-color: rgb(20, 20, 120);
-    }
-    cursor: pointer;
-    user-select: none;
-    padding: 5px;
-    border-bottom: 1px solid gray;
-    a {
-      display: flex;
-    }
-    img {
-      height: 50px;
-      width: 50px;
-      object-fit: cover;
-      border-radius: 100%;
-      margin-right: 10px;
-    }
-    p {
-      text-overflow: ellipsis;
-    }
-  }
-`;
+import CustomList from '../../Components/CustomList';
 
 class HotBoard extends Component {
   constructor(props) {
@@ -42,7 +14,6 @@ class HotBoard extends Component {
       loading: false
     };
   }
-
   async APIFire() {
     try {
       let json = await API(this.api, { page: this.state.page });
@@ -61,8 +32,7 @@ class HotBoard extends Component {
   render() {
     return (
       <div className="HotBoard">
-        <h1>熱門看板</h1>
-        <BoardList>
+        <CustomList>
           {this.state.board.map((b, key) => (
             <li key={key}>
               <Link to={{ pathname: `/board/${b.bsn}`, name: b.title }}>
@@ -71,7 +41,7 @@ class HotBoard extends Component {
               </Link>
             </li>
           ))}
-        </BoardList>
+        </CustomList>
         <LoadButton onClick={this.APIFire.bind(this)}>Load More</LoadButton>
       </div>
     );
