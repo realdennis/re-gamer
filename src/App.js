@@ -52,6 +52,7 @@ class App extends Component {
           <Header />
           <Main>
             <Route path="" exact render={() => <Board APItype="Hot" />} />
+            <Route path="/search" exact component={Search} />
             <Route
               path="/search/board/:keyword"
               render={({ match }) => (
@@ -59,7 +60,6 @@ class App extends Component {
               )}
             />
             <Route path="/about" component={About} />
-            <Route path="/search" component={Search} />
             <Route path="/recent" name="最近瀏覽" component={About} />
             <Route path="/board/:bsn" component={InBoard} />
             <Route path="/article/:bsn/:snA" component={InArticle} />

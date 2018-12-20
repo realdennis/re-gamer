@@ -13,15 +13,33 @@ class InBoard extends Component {
     super(props);
     this.state = {
       result: [],
-      page: 1
+      page: 1,
+      hasMore: true,
+      boardName:''
     };
   }
   async APIFire() {
+    if (!this.state.hasMore) return;
     try {
       let json = await API(URL, {
         bsn: this.props.match.params.bsn,
         page: this.state.page
       });
+      if(this.state.boardName===''){
+        this.setState({boardName:json.otherInfo.boardName})
+      }
+      if (json.list.length === 0) {
+        this.setState({ hasMore: false });
+        return;
+      }
+      if (
+        this.state.result.length !== 0 &&
+        this.state.result[this.state.result.length - 1].snA ===
+          json.list[json.list.length - 1].snA
+      ) {
+        this.setState({ hasMore: false });
+        return;
+      }
       this.setState(prev => ({
         result: [...prev.result, ...json.list],
         page: (prev.page += 1)
@@ -37,14 +55,30 @@ class InBoard extends Component {
   render() {
     return (
       <div>
+        {/*this.state.boardName&&<h1 className="board-name">{this.state.boardName}</h1>*/}
         <CustomList>
           {this.state.result.map((article, index) => (
-            <ArticleItem article={article} key={index} />
+            <ArticleItem article={article} key={index} index={index} />
           ))}
         </CustomList>
-        <LoadButton onClick={() => this.APIFire()}>Load More</LoadButton>
+        {this.state.hasMore ? (
+          <LoadButton onClick={() => this.APIFire()}>Load More</LoadButton>
+        ) : (
+          <p>到底了</p>
+        )}
       </div>
     );
   }
 }
-export default InBoard;
+export default InBoard
+/* styled(InBoard)`
+.board-name{
+  padding:5px;
+  position:sticky;
+  top:0;
+  z-index:2;
+  margin:0;
+  background-color:navy;
+  color:gold;
+}
+`;*/

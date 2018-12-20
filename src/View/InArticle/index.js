@@ -16,6 +16,7 @@ const CardList = styled(CustomList)`
     img {
       max-width: 100%;
     }
+    p.title,
     p.author,
     p.time {
       background-color: navy;
@@ -29,22 +30,33 @@ const CardList = styled(CustomList)`
 class InArticle extends Component {
   constructor(props) {
     super(props);
-    //console.log(this.props);
-    this.name = this.props.location.name;
-    this.bsn = this.props.match.params.bsn;
-    this.snA = this.props.match.params.snA;
     this.state = {
       result: [],
-      index: 1
+      index: 1,
+      hasMore: true
     };
   }
   async APIFire() {
+    if (!this.state.hasMore) return;
     try {
       let json = await API(URL, {
-        bsn: this.bsn,
-        snA: this.snA,
+        bsn: this.props.match.params.bsn,
+        snA: this.props.match.params.snA,
         index: this.state.index
       });
+      if (json.list.length === 0) {
+        this.setState({ hasMore: false });
+        return;
+      }
+      if (
+        this.state.result.length !== 0 &&
+        this.state.result[this.state.result.length - 1].sn ===
+          json.list[json.list.length - 1].sn
+      ) {
+        this.setState({ hasMore: false });
+        return;
+      }
+
       this.setState(prev => ({
         result: [...prev.result, ...json.list],
         index: (prev.index += 20)
@@ -61,11 +73,15 @@ class InArticle extends Component {
     return (
       <div className={this.props.className}>
         <CardList>
-          {this.state.result.map((card,index) => (
-            <CardItem card={card} key={index} />
+          {this.state.result.map((card, index) => (
+            <CardItem card={card} key={index} index={index} />
           ))}
         </CardList>
-        <LoadButton onClick={() => this.APIFire()}>Load More</LoadButton>
+        {this.state.hasMore ? (
+          <LoadButton onClick={() => this.APIFire()}>Load More</LoadButton>
+        ) : (
+          <p>到底了</p>
+        )}
       </div>
     );
   }

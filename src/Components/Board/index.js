@@ -15,14 +15,30 @@ class Board extends Component {
     this.state = {
       board: [],
       page: 1,
-      loading: false
+      loading: false,
+      hasMore: true
     };
   }
   async APIFire() {
+    if (!this.state.hasMore) return;
     try {
       let query = { page: this.page };
       if (this.props.keyword) query = { q: this.props.keyword, ...query };
+      //If Route from search form
       let json = await API(_API[this.props.APItype], query);
+      if (json.length === 0) {
+        this.setState({ hasMore: false });
+        return;
+      }
+      if (
+        this.state.board.length !== 0 &&
+        this.state.board[this.state.board.length - 1].bsn ===
+          json[json.length - 1].bsn
+      ) {
+        this.setState({ hasMore: false });
+        return;
+      }
+
       this.page += 1;
       this.setState(prev => ({
         board: [...prev.board, ...json]
@@ -52,7 +68,11 @@ class Board extends Component {
             />
           ))}
         </CustomList>
-        <LoadButton onClick={this.APIFire.bind(this)}>Load More</LoadButton>
+        {this.state.hasMore ? (
+          <LoadButton onClick={this.APIFire.bind(this)}>Load More</LoadButton>
+        ) : (
+          <p>已經到底了!</p>
+        )}
       </div>
     );
   }
