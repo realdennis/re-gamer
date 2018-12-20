@@ -84,7 +84,6 @@ class Search extends Component {
         {this.state.isSubmit ? (
           <div>
             <h2>Now search... {this.state.keyword}</h2>
-            <button onClick={() => this.reset()}>Back</button>
             <SearchList>
               {this.state.result.map((result, key) => (
                 <li key={key}>
@@ -104,7 +103,7 @@ class Search extends Component {
           </div>
         ) : (
           <SearchFormWrapper>
-            <h2>搜尋...</h2>
+            <h2>搜尋看板...</h2>
             <form onSubmit={e => this.search(e)}>
               <input type="text" />
               <button>

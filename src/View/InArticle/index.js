@@ -6,11 +6,11 @@ import styled from 'styled-components';
 const URL = 'https://api.gamer.com.tw/mobile_app/forum/v3/C.php';
 const CardList = styled(CustomList)`
   li {
-    border:none;
-    opacity:.8;
+    border: none;
+    opacity: 0.8;
     &:hover {
-      background-color:black;
-      opacity:1;
+      background-color: black;
+      opacity: 1;
     }
     img {
       max-width: 100%;
@@ -19,6 +19,9 @@ const CardList = styled(CustomList)`
     p.time {
       background-color: navy;
       margin: 0;
+    }
+    p.content{
+      overflow:auto;
     }
   }
 `;
@@ -51,9 +54,10 @@ class InArticle extends Component {
     }
   }
   highLight(e) {
-    e.currentTarget
-      .querySelectorAll('*')
-      .forEach(dom => (dom.style.color = 'silver'));
+    e.currentTarget.querySelectorAll('*').forEach(dom => {
+      dom.style.color = 'silver';
+      dom.style.backgroundColor = 'black';
+    });
   }
   componentDidMount() {
     this.APIFire();

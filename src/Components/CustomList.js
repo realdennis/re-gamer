@@ -16,13 +16,14 @@ const CustomList = styled.ul`
       padding: 5px;
     }
     & > a {
-      padding:5px;
+      padding: 5px;
       display: flex;
       align-items: center;
       & > img {
         padding: 0;
         height: 50px;
         width: 50px;
+        min-width: 50px;
         object-fit: cover;
         border-radius: 100%;
         margin-right: 10px;

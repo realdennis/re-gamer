@@ -71,7 +71,7 @@ class App extends Component {
               </li>
               <li>
                 <Link to="/recent">
-                  <FontAwesomeIcon icon="clock" />
+                  <FontAwesomeIcon icon="star" />
                 </Link>
               </li>
               <li>

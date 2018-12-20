@@ -7,9 +7,24 @@ import * as serviceWorker from './serviceWorker';
 import smoothscroll from 'smoothscroll-polyfill';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHotjar } from '@fortawesome/free-brands-svg-icons';
-import { faFire, faSearch,faClock,faInfoCircle,faChevronLeft} from '@fortawesome/free-solid-svg-icons';
+import {
+  faFire,
+  faSearch,
+  faClock,
+  faInfoCircle,
+  faChevronLeft,
+  faStar
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faHotjar, faFire, faSearch,faClock,faInfoCircle,faChevronLeft);
+library.add(
+  faHotjar,
+  faFire,
+  faSearch,
+  faClock,
+  faInfoCircle,
+  faChevronLeft,
+  faStar
+);
 
 smoothscroll.polyfill();
 ReactDOM.render(<App />, document.getElementById('root'));
