@@ -3,6 +3,7 @@ import LoadButton from '../../Components/LoadButton';
 import API from '../../Lib/API';
 import CustomList from '../../Components/CustomList';
 import styled from 'styled-components';
+import CardItem from './CardItem';
 const URL = 'https://api.gamer.com.tw/mobile_app/forum/v3/C.php';
 const CardList = styled(CustomList)`
   li {
@@ -20,8 +21,8 @@ const CardList = styled(CustomList)`
       background-color: navy;
       margin: 0;
     }
-    p.content{
-      overflow:auto;
+    p.content {
+      overflow: auto;
     }
   }
 `;
@@ -53,12 +54,6 @@ class InArticle extends Component {
       console.log(e);
     }
   }
-  highLight(e) {
-    e.currentTarget.querySelectorAll('*').forEach(dom => {
-      dom.style.color = 'silver';
-      dom.style.backgroundColor = 'black';
-    });
-  }
   componentDidMount() {
     this.APIFire();
   }
@@ -66,20 +61,8 @@ class InArticle extends Component {
     return (
       <div className={this.props.className}>
         <CardList>
-          {this.state.result.map((card, k) => (
-            <li key={k}>
-              <div>
-                <p className="author">
-                  {card.author} ({card.nickname})
-                </p>
-                <p className="time">{card.date}</p>
-                <p
-                  onClick={e => this.highLight(e)}
-                  className="content"
-                  dangerouslySetInnerHTML={{ __html: card.content_html }}
-                />
-              </div>
-            </li>
+          {this.state.result.map((card,index) => (
+            <CardItem card={card} key={index} />
           ))}
         </CardList>
         <LoadButton onClick={() => this.APIFire()}>Load More</LoadButton>

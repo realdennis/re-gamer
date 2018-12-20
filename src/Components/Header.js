@@ -1,36 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: ''
-    };
-    console.log(this.props.location.pathname.split('/'));
-  }
-  backButton() {
-    window.history.back();
-  }
-  componentDidUpdate() {}
-  render() {
-    return (
-      <header className={this.props.className}>
-        {this.props.location.pathname.split('/').length > 2 ? (
-          <div className="back-button" onClick={this.backButton}>
-            <FontAwesomeIcon icon="chevron-left" />
-          </div>
-        ) : (
-          undefined
-        )}
+const backButton = () => window.history.back();
+const Header = props => (
+  <header className={props.className}>
+    {props.location.pathname.split('/').length > 2 && (
+      <div className="back-button" onClick={backButton}>
+        <FontAwesomeIcon icon="chevron-left" />
+      </div>
+    )}
+    <h1 className="App-name">巴哈閱讀器</h1>
+  </header>
+);
 
-        {/*  <p>{this.props.location.name}</p>*/}
-        <h1 className="App-name">巴哈閱讀器</h1>
-      </header>
-    );
-  }
-}
 export default withRouter(styled(Header)`
   -webkit-app-region: drag;
   position: relative;

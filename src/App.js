@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
-import HotBoard from './View/HotBoard';
+//import HotBoard from './View/HotBoard';
+import Board from './Components/Board';
 import About from './View/About';
 import Search from './View/Search';
 import InBoard from './View/InBoard';
@@ -50,7 +51,13 @@ class App extends Component {
         <div className={this.props.className}>
           <Header />
           <Main>
-            <Route path="" exact component={HotBoard} />
+            <Route path="" exact render={() => <Board APItype="Hot" />} />
+            <Route
+              path="/search/board/:keyword"
+              render={({ match }) => (
+                <Board keyword={match.params.keyword} APItype="Search" />
+              )}
+            />
             <Route path="/about" component={About} />
             <Route path="/search" component={Search} />
             <Route path="/recent" name="最近瀏覽" component={About} />
