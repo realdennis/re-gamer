@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import LoadButton from '../LoadButton';
+import LoadButton from '../../Components/LoadButton';
 import API from '../../Lib/API';
-import CustomList from '../CustomList';
+import CustomList from '../../Components/CustomList';
 import BoardItem from './BoardItem';
 const _API = {
   Hot: 'https://api.gamer.com.tw/mobile_app/forum/v1/hot_board.php',
   Search: 'https://api.gamer.com.tw/mobile_app/forum/v1/search_board.php'
 };
-
 class Board extends Component {
   constructor(props) {
     super(props);

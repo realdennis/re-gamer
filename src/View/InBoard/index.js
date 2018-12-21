@@ -15,7 +15,7 @@ class InBoard extends Component {
       result: [],
       page: 1,
       hasMore: true,
-      boardName:''
+      boardName: ''
     };
   }
   async APIFire() {
@@ -25,8 +25,8 @@ class InBoard extends Component {
         bsn: this.props.match.params.bsn,
         page: this.state.page
       });
-      if(this.state.boardName===''){
-        this.setState({boardName:json.otherInfo.boardName})
+      if (this.state.boardName === '') {
+        this.setState({ boardName: json.otherInfo.boardName });
       }
       if (json.list.length === 0) {
         this.setState({ hasMore: false });
@@ -70,7 +70,7 @@ class InBoard extends Component {
     );
   }
 }
-export default InBoard
+export default InBoard;
 /* styled(InBoard)`
 .board-name{
   padding:5px;
