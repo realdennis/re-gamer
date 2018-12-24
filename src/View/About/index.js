@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-//action
-import { set_title } from '../../Store/Action';
+import mapSetTitle from '../../Lib/MapSetTitle';
 
-// Map Redux actions to component props
-const mapDispatchToProps = dispatch => ({
-  ChangeTitle: t => dispatch(set_title(t))
-});
 class About extends Component {
   componentDidMount() {
-    this.props.ChangeTitle('About');
+    this.props.setTitle('About');
   }
   render() {
-    return <React.Fragment></React.Fragment>;
+    return <React.Fragment/>;
   }
 }
 export default connect(
   null,
-  mapDispatchToProps
+  mapSetTitle
 )(About);

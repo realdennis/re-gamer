@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CustomList from '../../Components/CustomList';
-import LoadButton from '../../Components/LoadButton';
+import LoadButton from '../../Components/LoadMore';
 import API from '../../Lib/API';
 //import styled from 'styled-components';
 import ArticleItem from './ArticleItem';
@@ -15,12 +15,14 @@ class InBoard extends Component {
       result: [],
       page: 1,
       hasMore: true,
-      boardName: ''
+      boardName: '',
+      loading: false
     };
   }
   async APIFire() {
     if (!this.state.hasMore) return;
     try {
+      this.setState({ loading: true });
       let json = await API(URL, {
         bsn: this.props.match.params.bsn,
         page: this.state.page
@@ -47,6 +49,8 @@ class InBoard extends Component {
     } catch (e) {
       console.log('InBoard api error');
       console.log(e);
+    } finally {
+      this.setState({ loading: false });
     }
   }
   componentDidMount() {
@@ -61,11 +65,11 @@ class InBoard extends Component {
             <ArticleItem article={article} key={index} index={index} />
           ))}
         </CustomList>
-        {this.state.hasMore ? (
-          <LoadButton onClick={() => this.APIFire()}>Load More</LoadButton>
-        ) : (
-          <p>到底了</p>
-        )}
+        <LoadButton
+          loading={this.state.loading}
+          hasMore={this.state.hasMore}
+          fire={this.APIFire.bind(this)}
+        />
       </div>
     );
   }

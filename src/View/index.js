@@ -16,7 +16,7 @@ export default () => (
       )}
     />
     <Route path="/about" component={About} />
-    <Route path="/recent" name="最近瀏覽" component={About} />
+    <Route path="/favorite" name="我的最愛" component={About} />
     <Route path="/board/:bsn" component={InBoard} />
     <Route path="/article/:bsn/:snA" component={InArticle} />
   </React.Fragment>

@@ -1,1 +1,1 @@
-export const set_title = text => ({ type: 'title', text });
+export const SetTitle = text => ({ type: 'title', text });

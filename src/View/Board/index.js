@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LoadButton from '../../Components/LoadButton';
+import LoadButton from '../../Components/LoadMore';
 import API from '../../Lib/API';
 import CustomList from '../../Components/CustomList';
 import BoardItem from './BoardItem';
@@ -13,7 +13,6 @@ class Board extends Component {
     this.page = 1;
     this.state = {
       board: [],
-      page: 1,
       loading: false,
       hasMore: true
     };
@@ -24,7 +23,9 @@ class Board extends Component {
       let query = { page: this.page };
       if (this.props.keyword) query = { q: this.props.keyword, ...query };
       //If Route from search form
+      this.setState({ loading: true });
       let json = await API(_API[this.props.APItype], query);
+      //this.setState({ loading: false });
       if (json.length === 0) {
         this.setState({ hasMore: false });
         return;
@@ -45,6 +46,8 @@ class Board extends Component {
     } catch (e) {
       console.log('api error');
       console.log(e);
+    } finally {
+      this.setState({ loading: false });
     }
   }
   FavClick(e, key) {
@@ -67,11 +70,11 @@ class Board extends Component {
             />
           ))}
         </CustomList>
-        {this.state.hasMore ? (
-          <LoadButton onClick={this.APIFire.bind(this)}>Load More</LoadButton>
-        ) : (
-          <p>已經到底了!</p>
-        )}
+        <LoadButton
+          loading={this.state.loading}
+          hasMore={this.state.hasMore}
+          fire={this.APIFire.bind(this)}
+        />
       </div>
     );
   }

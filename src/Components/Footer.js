@@ -16,7 +16,7 @@ const Footer = ({ className }) => (
         </Link>
       </li>
       <li>
-        <Link to="/recent">
+        <Link to="/favorite">
           <FontAwesomeIcon icon="star" />
         </Link>
       </li>
