@@ -3,6 +3,9 @@ import LoadButton from '../../Components/LoadMore';
 import API from '../../Lib/API';
 import CustomList from '../../Components/CustomList';
 import BoardItem from './BoardItem';
+import { connect } from 'react-redux';
+const mapStateToProps = state => ({ favList: state.Fav.favList });
+
 const _API = {
   Hot: 'https://api.gamer.com.tw/mobile_app/forum/v1/hot_board.php',
   Search: 'https://api.gamer.com.tw/mobile_app/forum/v1/search_board.php'
@@ -50,11 +53,6 @@ class Board extends Component {
       this.setState({ loading: false });
     }
   }
-  FavClick(e, key) {
-    e.preventDefault();
-    e.target.style.color = 'gold';
-    console.log(this.state.board[key]);
-  }
   componentDidMount() {
     this.APIFire();
   }
@@ -64,8 +62,8 @@ class Board extends Component {
         <CustomList>
           {this.state.board.map((board, index) => (
             <BoardItem
+              json={this.state.board[index]}
               board={board}
-              FavClick={e => this.FavClick(e, index)}
               key={index}
             />
           ))}
@@ -79,4 +77,7 @@ class Board extends Component {
     );
   }
 }
-export default Board;
+export default connect(
+  mapStateToProps,
+  null
+)(Board);

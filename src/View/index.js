@@ -4,6 +4,7 @@ import About from './About';
 import Search from './Search';
 import InBoard from './InBoard';
 import InArticle from './InArticle';
+import Favorite from './Favorite';
 import { Route } from 'react-router-dom';
 export default () => (
   <React.Fragment>
@@ -16,7 +17,7 @@ export default () => (
       )}
     />
     <Route path="/about" component={About} />
-    <Route path="/favorite" name="我的最愛" component={About} />
+    <Route path="/favorite" name="我的最愛" component={Favorite} />
     <Route path="/board/:bsn" component={InBoard} />
     <Route path="/article/:bsn/:snA" component={InArticle} />
   </React.Fragment>
