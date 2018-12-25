@@ -65,6 +65,7 @@ class Board extends Component {
               json={this.state.board[index]}
               board={board}
               key={index}
+              favList={this.props.favList}
             />
           ))}
         </CustomList>

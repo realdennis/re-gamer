@@ -15,7 +15,6 @@ class InBoard extends Component {
       result: [],
       page: 1,
       hasMore: true,
-      boardName: '',
       loading: false
     };
   }
@@ -27,9 +26,6 @@ class InBoard extends Component {
         bsn: this.props.match.params.bsn,
         page: this.state.page
       });
-      if (this.state.boardName === '') {
-        this.setState({ boardName: json.otherInfo.boardName });
-      }
       if (json.list.length === 0) {
         this.setState({ hasMore: false });
         return;

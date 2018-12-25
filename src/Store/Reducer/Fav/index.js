@@ -2,13 +2,20 @@ export default (state = { favList: [] }, action) => {
   switch (action.type) {
     case 'add':
       const temp = [...state.favList, action.board];
+      //remove the same bsn object
       return {
         ...state,
-        favList: temp.filter((b, index) => temp.indexOf(b) === index)
+        favList: temp.filter(
+          (board, index, self) =>
+            index === self.findIndex(b => b.bsn === board.bsn)
+        )
       };
     case 'remove':
-      const index = state.favList.indexOf(action.board);
-      return { ...state, favList: state.favList.filter((n, i) => i !== index) };
+      // remove by bsn
+      return {
+        ...state,
+        favList: state.favList.filter(b => b.bsn !== action.board.bsn)
+      };
     default:
       return state;
   }

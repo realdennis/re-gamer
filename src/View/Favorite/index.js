@@ -13,6 +13,7 @@ const Favorite = ({favList}) => {
             json={favList[index]}
             board={board}
             key={index}
+            favList={favList}
           />
         ))}
       </CustomList>

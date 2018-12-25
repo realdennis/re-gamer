@@ -1,8 +1,11 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const backButton = () => window.history.back();
+const mapStateToProps = state => ({ title: state.Title.name });
+
 class Header extends React.Component {
   getTitle(path) {
     switch (path.split('/')[1]) {
@@ -15,7 +18,7 @@ class Header extends React.Component {
       case 'about':
         return '關於';
       default:
-        return '巴哈閱讀器';
+        return this.props.title;
     }
   }
   render() {
@@ -33,31 +36,36 @@ class Header extends React.Component {
     );
   }
 }
-export default withRouter(styled(Header)`
-  -webkit-app-region: drag;
-  position: relative;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  background-color: rgb(30, 30, 30);
-  div.back-button {
-    position: absolute;
-    width: 50px;
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(styled(Header)`
+    -webkit-app-region: drag;
+    position: relative;
     height: 50px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
-    font-size: 1.4em;
-  }
-  .App-name {
-    font-size: 18px;
-    padding: 0;
-    margin: 0;
-    justify-content: center;
-    height: inherit;
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
-`);
+    background-color: rgb(30, 30, 30);
+    div.back-button {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 1.4em;
+    }
+    .App-name {
+      font-size: 18px;
+      padding: 0;
+      margin: 0;
+      justify-content: center;
+      height: inherit;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+  `)
+);
