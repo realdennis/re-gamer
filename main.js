@@ -3,19 +3,17 @@ const { app, BrowserWindow, shell } = require('electron');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 400,
-    height: 600,
-    frame: false,
-    webPreferences: { webSecurity: false }
+    height: 640,
+    frame: false
   });
-
   // and load the index.html of the app.
-  mainWindow.loadURL('http://localhost:3000/');
-
+  //mainWindow.loadURL('http://localhost:3000/');
+  //console.log(`file://${path.resolve()}/build/index.html`)
+  mainWindow.loadFile('build/index.html');
   mainWindow.webContents.on('new-window', (event, url) => {
     event.preventDefault();
     shell.openExternal(url);

@@ -7,6 +7,7 @@ const mapStateToProps = state => ({ favList: state.Fav.favList });
 const Favorite = ({favList}) => {
   return (
     <div>
+      {favList.length===0&&<p>快去加入關注的看板吧！</p>}
       <CustomList>
         {favList.map((board, index) => (
           <BoardItem
