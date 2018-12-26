@@ -1,4 +1,5 @@
 # re-gamer
+[Release](https://github.com/realdennis/re-gamer/releases/tag/1.0.0)
 
 ## Introduction
 
