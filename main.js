@@ -8,12 +8,13 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 400,
     height: 640,
-    frame: false
+    frame: false,
+    webPreferences: { webSecurity: false }
   });
   // and load the index.html of the app.
-  //mainWindow.loadURL('http://localhost:3000/');
+  mainWindow.loadURL('http://localhost:3000/');
   //console.log(`file://${path.resolve()}/build/index.html`)
-  mainWindow.loadFile('build/index.html');
+  //mainWindow.loadFile('build/index.html');
   mainWindow.webContents.on('new-window', (event, url) => {
     event.preventDefault();
     shell.openExternal(url);

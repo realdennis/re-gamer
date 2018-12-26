@@ -9,7 +9,7 @@ import { Route } from 'react-router-dom';
 export default () => (
   <React.Fragment>
     <Route path="" exact render={() => <Board APItype="Hot" />} />
-    <Route path="/search" exact render={()=><Search></Search>} />
+    <Route path="/search" exact render={({history})=><Search history={history}></Search>} />
     <Route
       path="/search/board/:keyword"
       render={({ match }) => (
