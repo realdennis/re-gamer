@@ -26,8 +26,5 @@ export default styled(App)`
   main {
     overflow: auto;
     height: 100%;
-    & > * {
-      height: 100%;
-    }
   }
 `;

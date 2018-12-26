@@ -3,7 +3,7 @@ const CustomList = styled.ul`
   margin: 0;
   list-style: none;
   padding: 0;
-  li {
+  & > li {
     &:hover {
       opacity: 0.8;
       background-color: rgb(20, 20, 120);

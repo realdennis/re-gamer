@@ -1,13 +1,15 @@
 import React from 'react';
+import CommentItem from './CommentItem';
+import styled from 'styled-components';
 const highLight = e => {
   e.currentTarget.querySelectorAll('*').forEach(dom => {
     dom.style.color = 'silver';
     dom.style.backgroundColor = 'black';
   });
 };
-const CardItem = ({ card, index }) => {
+const CardItem = ({ className, card, index }) => {
   return (
-    <li>
+    <li className={className}>
       <div>
         {index === 0 && <p className="title">{card.title}</p>}
         <p className="author">
@@ -20,8 +22,24 @@ const CardItem = ({ card, index }) => {
           className="content"
           dangerouslySetInnerHTML={{ __html: card.content_html }}
         />
+        <div className="comments">
+          <ul>
+            {card.comment.map((comment, index) => (
+              <CommentItem comment={comment} key={index} />
+            ))}
+          </ul>
+        </div>
       </div>
     </li>
   );
 };
-export default CardItem;
+export default styled(CardItem)`
+margin:10px 0 ;
+  div.comments {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+`;

@@ -8,7 +8,6 @@ const URL = 'https://api.gamer.com.tw/mobile_app/forum/v3/C.php';
 const CardList = styled(CustomList)`
   li {
     border: none;
-    opacity: 0.8;
     &:hover {
       background-color: black;
       opacity: 1;
